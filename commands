@@ -44,5 +44,61 @@ Task 7:
    {"domain":"65.109.229.231:30240","endpoint":"/check-ingress","full_path:":"65.109.229.231:30240/check-ingress"} 
 
 Task 8:
+ kubectl apply -f repo-1/task/frontend-app.yaml
+
+Task 9:
+ kubectl expose deployment frontend-app --name=frontend-app-node --type=NodePort --port=80 --target-port=80
+ curl http://65.109.137.203:30676/
+ // 20240814211908
+// http://65.109.137.203:30676/
+
+  {
+   "message": "Welcome to your Kubernetes Exam!"
+  }
+ 
+
+Task 10: 
+ kubectl create -f repo-1/task/info.yaml
+
+Task 11:
+ kubectl create -f task-11-db-secret.yaml
+
+
+Task 12:
+ docker build --platform linux/amd64 --tag zivakhobov/frontend-app:v1 .
+ kubectl apply -f task-12-frontend-app-deployment.yaml  
+
+Task 13:
+ 
+ kubectl expose deployment frontend-app --name=frontend-app-node --type=NodePort --port=80 --target-port=80
+ kubectl expose deployment frontend-app --type=ClusterIP --port=80 
+
+Task 14:
+ kubectl create -f frontend-app-ingress.yaml 
+
+Task 15:
+ kubectl scale deployment --replicas=3 frontend-app
+
+
+Task 16:
+ kubectl get endpoints
+ 
+ frontend-app        10.233.102.162:80,10.233.74.73:80,10.233.97.139:80   15m
+
+
+Task 18:
+
+ kubectl apply -f task-18-cpu-limit-range.yaml
+
+Task 19:
+  kubectl apply -f task-12-frontend-app-deployment.yaml
+
+
+Task 21:
+   kubectl create -f cronjob.yaml 
+
+Task 22:
+ kubectl apply -f task-12-frontend-app-deployment.yaml 
 
  
+  

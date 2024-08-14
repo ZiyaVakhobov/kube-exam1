@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-app
+  name: frontend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+      - image: zivakhobov/frontend-app:v1
+        name: frontend-app
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        env:
+          - name: CPU
+            valueFrom:
+              resourceFieldRef:
+                containerName: frontend-app
+                resource: requests.cpu
+          - name: MEMORY
+            valueFrom:
+              resourceFieldRef:
+                containerName: frontend-app
+                resource: requests.memory
+        livenessProbe:
+             httpGet:
+               path: /helth
+               port: 80
+             initialDelaySeconds: 30
+             periodSeconds: 10

@@ -9,12 +9,11 @@ spec:
   selector:
     matchLabels:
       app: frontend-app
-  strategy: {}
   template:
     metadata:
       labels:
         app: frontend-app
     spec:
       containers:
-      - image: nvrbckdown/something
+      - image: nvrbckdown/something:v1
         name: something
