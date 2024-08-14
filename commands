@@ -1,0 +1,48 @@
+Task 1 commands:
+kubectl create namespace exam-zvakhobov
+
+Task 2 commands:
+ kubectl run nginx1 --image=nginx --labels="project=practice,author=ziyavuddin"
+  kubectl run nginx2 --image=nginx --labels="project=practice,author=ziyavuddin"
+Task 3 commands:
+ kubectl get pods -l project=practice
+    output:
+	NAME     READY   STATUS    RESTARTS   AGE
+	nginx1   1/1     Running   0          92s
+	nginx2   1/1     Running   0          83s
+
+Task 4:
+ kubectl create deployment flask-app --image nvrbckdown/flask-app --dry-run=client -o yaml > task4.yaml
+
+  kubectl create deployment flask-app --image=nvrbckdown/flask-app 
+  kubectl expose deployment flask-app --type=ClusterIP --port=5000
+  kubectl port-forward pod/flask-app-758f6bf65d-p6bwz  5000:5000
+
+  curl: 
+   curl 127.0.0.1:5000
+   {"env":"staging","http_port":"80","string":"Welcome to DevOps Course!"}
+
+Task 5:
+ kubectl expose deployment flask-app --name=flask-app-node --type=NodePort --port=5000 --target-port=5000
+ kubectl get services
+
+   NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+     flask-all-node   NodePort    10.233.51.207   <none>        5000:30240/TCP   11s
+     flask-app        ClusterIP   10.233.45.191   <none>        5000/TCP         8m20s  
+
+   curl http://65.109.229.231:30240
+     {"env":"staging","http_port":"80","string":"Welcome to DevOps Course!"}
+
+Task 6:
+ 
+ kubectl exec  -it nginx1 -- /bin/bash
+  root@nginx1:/# curl flask-app:5000
+   {"env":"staging","http_port":"80","string":"Welcome to DevOps Course!"}
+ 
+Task 7:
+  curl http://65.109.229.231:30240/check-ingress
+   {"domain":"65.109.229.231:30240","endpoint":"/check-ingress","full_path:":"65.109.229.231:30240/check-ingress"} 
+
+Task 8:
+
+ 
